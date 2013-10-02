@@ -1,9 +1,14 @@
 LyricalBattle::Application.routes.draw do
+
+  get "lobby/index"
+  get "messages/index"
+  get "messages/create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'messages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -13,6 +18,7 @@ LyricalBattle::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :messages
 
   # Example resource route with options:
   #   resources :products do
