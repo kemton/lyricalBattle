@@ -10,8 +10,9 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create!(params[:message].permit(:content))
+    #PrivatePub.publish_to("/messages/new", "alert('#{@message.content}');")
     # redirect to show action: redirect_to message_path(@message)
-    redirect_to messages_path
+    #redirect_to messages_path
   end
 
   def show
