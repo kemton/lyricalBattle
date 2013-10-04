@@ -1,5 +1,6 @@
 LyricalBattle::Application.routes.draw do
 
+  get "rooms/index"
   get "messages/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -18,6 +19,7 @@ LyricalBattle::Application.routes.draw do
   #   resources :products
   resources :messages
   resources :lobby
+  resources :rooms
 
   # Example resource route with options:
   #   resources :products do

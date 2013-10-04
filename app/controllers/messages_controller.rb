@@ -15,8 +15,4 @@ class MessagesController < ApplicationController
     #redirect_to messages_path
   end
 
-  def show
-    @message = Message.where("room_number" => params[:id])
-  end
-
 end
