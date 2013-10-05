@@ -3,6 +3,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-  	@message = Message.where("room_number" => params[:id])
+  	@messages = Message.where("room_number" => params[:id])
   end
 end
