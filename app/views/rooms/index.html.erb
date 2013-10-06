@@ -1,5 +1,4 @@
 <h1>LyricalBattle Lobby</h1>
-<p>Lista avoimista huoneista</p>
 <table>
 	<thead>
 		<th>Lock</th>
@@ -10,13 +9,13 @@
 	<tbody>
 		<tr>
 			<td>Open</td>
-			<td>Test room</td>
+			<td><%= link_to "Test room", room_path(1) %></a></td>
 			<td>lyric</td>
 			<td>4/10</td>
 		</tr>
 		<tr>
 			<td>Private</td>
-			<td>Short story room</td>
+			<td><%= link_to "Short story", room_path(2) %></td>
 			<td>Short story</td>
 			<td>8/10</td>
 		</tr>
