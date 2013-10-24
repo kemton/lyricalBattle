@@ -1,4 +1,16 @@
-<% publish_to "/channels/#{@channel}" do %>
-	$("#chat").append("<%= j render(@message) %>");
-	$("#new_message")[0].reset();
-<% end %>
+<%# publish_to "/channels/#{@channel}" do %>
+<%# broadcast "/channels/#{@channel}" do %>
+	//$("#chat").append("<%= j render(@message) %>");
+	//alert("<%= render text: @channel %>")
+	//$("#chat").append("<%= render text: @channel %>");
+<%# end %>
+
+/*faye = new Faye.Client('http://localhost:9292/faye');
+faye.subscribe("/channels/1", function (data) {
+	//$("#chat").append("<li><%= render data.object %></li>");
+	//$("#chat").append("<%= j render(@message) %>");
+	//$("#chat").append('<li>' + data.object.content + '</li>');
+	//eval(data);
+});*/
+
+$("#new_message")[0].reset();

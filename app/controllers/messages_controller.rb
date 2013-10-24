@@ -11,8 +11,18 @@ class MessagesController < ApplicationController
   def create
     @message = Message.create!(params[:message].permit(:content, :sender, :room_number))
     @channel = params[:message][:room_number]
-    PrivatePub.publish_to("/channels/#{@channel}", message: @message)
+    broadcast("/channels/#{@channel}", @message)
+    #render :json => @message
+    #PrivatePub.publish_to("/channels/#{@channel}", message: @message)
     #redirect_to messages_path
   end
+
+  private
+
+    def broadcast(channel, object)
+      message = {:channel => channel, :data => {:object => object, :channel => channel, :type => "message"}, :ext => {:auth_token => FAYE_TOKEN}}
+      uri = URI.parse("http://localhost:9292/faye")
+      Net::HTTP.post_form(uri, :message => message.to_json)
+    end
 
 end
