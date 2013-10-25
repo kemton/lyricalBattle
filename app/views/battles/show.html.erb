@@ -1,0 +1,67 @@
+<h1>Battle</h1>
+
+<div class="row-fluid">
+
+	<div class="span10">
+		
+		<div id="playerWrap" style="overflow-y: scroll; overflow-x: auto; border:2px solid;">
+			Result
+		</div>
+	</div>
+	<div class="span2"></div>
+	
+</div>
+
+<div class="row-fluid">
+
+	<div class="span10">
+		<div id="chatWrap" style="height: 500px; overflow-y: scroll; overflow-x: auto; border:2px solid;">
+			<ul id="chat">
+				<%= render @messages %>
+				<li><em>Previous messages</em></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="span2">
+		<div id="playerWrap" style="overflow-y: scroll; overflow-x: auto; border:2px solid;">
+			<em>2/10</em>
+			<ul id="players">
+				<li>Player1</li>
+				<li>Player2</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<div class="row-fluid">
+
+	<div class="span12">
+		<hr />
+		<%= form_for Message.new, remote: true do |f| %>
+			<input id="message_sender" name="message[sender]" value="testi_sender" type="hidden" />
+			<input id="message_room_number" name="message[room_number]" value="<%= render text: params[:id] %>" type="hidden" />
+			<%= f.text_field :content %>
+			<%= f.submit "Send" %>
+		<% end %>
+
+		<%= link_to "Back to lobby", battles_path %>
+	</div>
+
+</div>
+
+
+<%#= subscribe_to "/channels/#{params[:id]}" %>
+<script type="text/javascript">
+	channel = document.URL.split('/').slice(-1)[0];
+	faye = new Faye.Client('http://localhost:9292/faye');
+	faye.subscribe("/channels/"+channel, function (data) {
+		$("#chat").append('<li>' + data.object.content + '</li>');
+	});
+
+	window.setInterval(function() {
+		var elem = document.getElementById('chatWrap');
+		elem.scrollTop = elem.scrollHeight;
+	}, 1000);
+</script>

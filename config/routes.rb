@@ -19,6 +19,7 @@ LyricalBattle::Application.routes.draw do
   #   resources :products
   resources :messages
   resources :rooms
+  resources :battles
 
   # Example resource route with options:
   #   resources :products do
