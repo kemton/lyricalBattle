@@ -38,7 +38,6 @@
 </div>
 
 <div class="row-fluid">
-
 	<div class="span12">
 		<hr />
 		<%= form_for Message.new, remote: true do |f| %>
@@ -52,23 +51,3 @@
 	</div>
 
 </div>
-
-
-<%#= subscribe_to "/channels/#{params[:id]}" %>
-<script type="text/javascript">
-	$("#chatWrap").animate({ scrollTop: $("#chat").height() }, "fast");
-	
-	channel = document.URL.split('/').slice(-1)[0];
-	faye = new Faye.Client('http://localhost:9292/faye');
-
-	if (battleSubscription) {battleSubscription.cancel();} // cancel previous battle subscriptions
-
-	var battleSubscription = faye.subscribe("/channels/"+channel, function (data) {
-		if (data.type == "message") {
-			$("#chat").append('<li>' + data.object.content + '</li>');
-			$("#chatWrap").animate({ scrollTop: $("#chat").height() }, "fast");
-		}
-		console.log(data);
-	});
-
-</script>
