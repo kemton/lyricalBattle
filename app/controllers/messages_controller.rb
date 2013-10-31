@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   #end
 
   def create
-    @message = Message.create!(params[:message].permit(:content, :sender, :room_number))
+    @message = Message.create!(params[:message].permit(:content, :user, :room_number))
     @channel = params[:message][:room_number]
     broadcast("/channels/#{@channel}", @message)
     render :json => @message
