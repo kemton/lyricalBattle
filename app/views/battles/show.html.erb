@@ -1,3 +1,5 @@
+<% content_for :title, "Battle" %>
+ 
 <h1>Battle</h1>
 
 <div class="row-fluid">
@@ -54,14 +56,19 @@
 
 <%#= subscribe_to "/channels/#{params[:id]}" %>
 <script type="text/javascript">
+	$("#chatWrap").animate({ scrollTop: $("#chat").height() }, "fast");
+	
 	channel = document.URL.split('/').slice(-1)[0];
 	faye = new Faye.Client('http://localhost:9292/faye');
-	faye.subscribe("/channels/"+channel, function (data) {
-		$("#chat").append('<li>' + data.object.content + '</li>');
+
+	if (battleSubscription) {battleSubscription.cancel();} // cancel previous battle subscriptions
+
+	var battleSubscription = faye.subscribe("/channels/"+channel, function (data) {
+		if (data.type == "message") {
+			$("#chat").append('<li>' + data.object.content + '</li>');
+			$("#chatWrap").animate({ scrollTop: $("#chat").height() }, "fast");
+		}
+		console.log(data);
 	});
 
-	window.setInterval(function() {
-		var elem = document.getElementById('chatWrap');
-		elem.scrollTop = elem.scrollHeight;
-	}, 1000);
 </script>

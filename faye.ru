@@ -1,31 +1,44 @@
 # start rack: rackup faye.ru -s thin -E production
 
 require 'faye'
+require 'net/http'
+require 'json'
+
 require File.expand_path('../config/initializers/faye_token.rb', __FILE__)
-
-class ServerAuth
-  def incoming(message, callback)
-    if message['channel'] !~ %r{^/meta/}
-      if message['ext']['auth_token'] != FAYE_TOKEN
-        message['error'] = 'Invalid authentication token'
-      end
-    end
-    callback.call(message)
-  end
-
-  # IMPORTANT: clear out the auth token so it is not leaked to the client
-  def outgoing(message, callback)
-    if message['ext'] && message['ext']['auth_token']
-      message['ext'] = {} 
-    end
-    callback.call(message)
-  end
-end
-
-faye_server = Faye::RackAdapter.new(:mount => '/faye', :timeout => 45)
-faye_server.add_extension(ServerAuth.new)
+load 'faye/client_event.rb'
 
 # Websocket header missing fix
 Faye::WebSocket.load_adapter('thin')
+
+faye_server = Faye::RackAdapter.new(:mount => '/faye', :timeout => 45)
+faye_server.add_extension(ClientEvent.new)
+client_event = ClientEvent.new
+
+
+faye_server.on(:handshake) do |client_id|
+  puts "[handshake] - client: #{client_id}"
+end
+
+#connections = {}
+number_of_users = 0
+faye_server.on(:subscribe) do |client_id, channel|
+  number_of_users += 1
+  client_event.faye_publish_online_status(channel, number_of_users)
+  puts "[subscribe] - client: #{client_id}, channel: #{channel}"
+  #connections[channel] += 1
+end
+
+faye_server.on(:unsubscribe) do |client_id, channel|
+  number_of_users -= 1
+  puts "[unsubscribe] - client: #{client_id}, channel: #{channel}"
+end
+
+faye_server.on(:disconnect) do |client_id|
+  puts "[disconnect] - client: #{client_id}"
+end
+
+faye_server.on(:publish) do |client_id, channel, data|
+  puts "[publish] - client: #{client_id}, channel: #{channel}, data: #{data}"
+end
 
 run faye_server

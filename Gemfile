@@ -47,3 +47,4 @@ end
 gem 'thin'
 #gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'faye'
