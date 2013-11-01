@@ -14,3 +14,9 @@ jQuery ->
 			when "online"
 				$("#online").text "#{data.object.number_of_users}"
 		console.log data
+
+	$('#new_message')
+	.bind "ajax:success", (event, data, status, xhr) ->
+		$("#new_message")[0].reset()
+
+	return
