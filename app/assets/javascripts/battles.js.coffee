@@ -7,7 +7,10 @@ jQuery ->
 	battleSubscription.cancel if battleSubscription? # cancel previous battle subscriptions
 
 	battleSubscription = faye.subscribe "/channels/#{channel}", (data) ->
-		if data.type is "message"
-			$("#chat").append "<li>#{data.object.content}</li>" 
-			$("#chatWrap").animate { scrollTop: $("#chat").height() }, "fast"
+		switch data.type
+			when "message"
+				$("#chat").append "<li>#{data.object.content}</li>"
+				$("#chatWrap").animate { scrollTop: $("#chat").height() }, "fast"
+			when "online"
+				$("#online").text "#{data.object.number_of_users}"
 		console.log data

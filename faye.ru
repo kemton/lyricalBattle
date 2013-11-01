@@ -1,4 +1,7 @@
 # start rack: rackup faye.ru -s thin -E production
+#
+# Launch faye inside thin. Fix long polling issues: https://github.com/faye/faye/issues/192
+# thin -p 9292 -t 60 -R faye.ru start
 
 require 'faye'
 require 'net/http'
@@ -19,17 +22,21 @@ faye_server.on(:handshake) do |client_id|
   puts "[handshake] - client: #{client_id}"
 end
 
-#connections = {}
-number_of_users = 0
+connections = {}
+#number_of_users = 0
 faye_server.on(:subscribe) do |client_id, channel|
-  number_of_users += 1
-  client_event.faye_publish_online_status(channel, number_of_users)
+  if connections[channel.to_sym].nil?
+    connections[channel.to_sym] = 0
+  end
+
+  connections[channel.to_sym] += 1
+  client_event.faye_publish_online_status(channel, connections[channel.to_sym])
   puts "[subscribe] - client: #{client_id}, channel: #{channel}"
-  #connections[channel] += 1
 end
 
 faye_server.on(:unsubscribe) do |client_id, channel|
-  number_of_users -= 1
+  connections[channel.to_sym] -= 1
+  client_event.faye_publish_online_status(channel, connections[channel.to_sym])
   puts "[unsubscribe] - client: #{client_id}, channel: #{channel}"
 end
 

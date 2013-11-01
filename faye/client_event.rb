@@ -32,6 +32,6 @@ class ClientEvent
   end
 
   def faye_publish_online_status(channel, number_of_users)
-    faye_client.publish(channel, {'message' => {'number_of_users' => number_of_users, 'type' => 'online'}, 'ext' => {:auth_token => FAYE_TOKEN}})
+    faye_client.publish(channel, {'object' => {'number_of_users' => number_of_users}, 'type' => 'online', 'ext' => {:auth_token => FAYE_TOKEN}})
   end
 end
