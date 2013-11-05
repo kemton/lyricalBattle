@@ -15,7 +15,6 @@
 /log/*.log
 /tmp
 
-/config/private_pub.yml
 /ruby
 
 /config/initializers/secret_token.rb
