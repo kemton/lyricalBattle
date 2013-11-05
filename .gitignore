@@ -17,3 +17,7 @@
 
 /config/private_pub.yml
 /ruby
+
+/config/initializers/secret_token.rb
+/config/initializers/faye_token.rb
+/config/initializers/facebook_token.rb

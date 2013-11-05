@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-LyricalBattle::Application.config.secret_key_base = '7731c9ba38c4405ea99c67e74262c20d77de5e9cf0e0e6a91b2ab0f321fd20ab4c3ef7114bdf041dd69a4a605f9c89b1fee6d40e17b4d8b22f6fca8aa5aa0443'
+LyricalBattle::Application.config.secret_key_base = 'e3622b8d0de3eab21e8219dd970b2910edc0fbb21be2c493e3fb56b85e70512e682c855416fe052bb88a7658d99d8caaa8343aea3ee99266ec74f2a5e80054f6'
