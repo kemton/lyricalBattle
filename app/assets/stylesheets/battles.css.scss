@@ -1,3 +1,27 @@
-// Place all the styles related to the battles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// Bubble orginal source: http://www.ilikepixels.co.uk/drop/bubbler/
+$light-blue: #4CFFFF;
+
+.bubble {
+	position: relative;
+	//width: 370px;
+	height: 60px;
+	padding: 2px;
+	background: $light-blue;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	margin: 5px;
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 19px 24px 19px 0;
+	border-color: transparent $light-blue;
+	display: block;
+	width: 0;
+	z-index: 1;
+	left: -24px;
+	top: 13px;
+}
