@@ -1,6 +1,16 @@
 <div class="span5 offset3">
 	<div id="current_battles">
-		<div class="bubble"><%= link_to "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.", battle_path(1) %><br />online 4/10</div>
-		<div class="bubble"><%= link_to "Sed posuere interdum sem. Quisque ligula eros ullamcorper quis.", battle_path(2) %><br />online 8/10</div>
+		<div class="bubble">
+			<%= form_for :battle, :url => {:action => 'create'} do |f| %>
+				<%= f.label :first_line %>
+    			<%= f.text_field :first_line %>
+    			<%= f.submit %>
+			<% end %>
+		</div>
+		<% @battles.each do |battle| %>
+			<div class="bubble">
+				<%= link_to "#{battle.content}", battle_path("#{battle.room_number}") %><br />online 4/10
+			</div>
+		<% end %>
 	</div>
 </div>
