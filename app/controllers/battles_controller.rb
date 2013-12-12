@@ -2,7 +2,7 @@ class BattlesController < ApplicationController
 	def index
 		#time_range = (Time.now - 1.day)..Time.now
 		#@battles = Message.where("created_at" => time_range)
-		@battles = Battle.all
+		@battles = Battle.all.joins(:user)
 	end
 
 	def show
