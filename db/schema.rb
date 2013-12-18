@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128125241) do
+ActiveRecord::Schema.define(version: 20131218193555) do
 
   create_table "battles", force: true do |t|
     t.integer  "message_id"
@@ -24,10 +24,12 @@ ActiveRecord::Schema.define(version: 20131128125241) do
     t.integer  "user_id"
     t.text     "content"
     t.integer  "battle_id"
-    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "messages", ["ancestry"], name: "index_messages_on_ancestry"
 
   create_table "users", force: true do |t|
     t.string   "provider"

@@ -5,11 +5,10 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new
+    @message = Message.new(:parent_id => params[:message][:parent_id])
     @message.content = params[:message][:content]
     @message.user = current_user
     @message.battle = Battle.find(params[:message][:battle])
-    @message.parent = Message.find(params[:message][:parent])
 
     if @message.save
       broadcast("/channels/#{@channel}", @message)

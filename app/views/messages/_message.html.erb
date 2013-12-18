@@ -1,4 +1,14 @@
-<li>
-	<%= message.user.name %> - <%= message.created_at.to_time.strftime('%H:%M') %><br />
-	<%= message.content %> <input placeholder="continue story..." id="message_content" name="message[content]" /> <button name="message[parent]" value="<%= message.id %>">send</button>
-</li>
+<%= form_for Message.new, remote: true do |f| %>
+	<input id="message_battle" name="message[battle]" value="<%= params[:id] %>" type="hidden" />
+	<input id="message_battle" name="message[parent_id]" value="<%= message.id %>" type="hidden" />
+	<div class="message">
+		<div class="user_name"><%= message.user.name %></div><div class="created_at"><%= message.created_at.strftime("%B %d, %Y") %></div> 
+		<div class="content">
+			<%= message.content %>
+		</div>
+		<div class="actions">
+			<%#= link_to "Reply", new_message_path(:parent_id => message) %>
+    		<%= f.text_field :content %> <%= f.submit "Send" %>
+		</div>
+	</div>
+<% end %>

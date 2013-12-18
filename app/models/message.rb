@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
+	has_ancestry
 	belongs_to :user
 	belongs_to :battle
-	belongs_to :parent, class_name: "Message"
-	validates :content, :user, :battle, presence: true
+	#validates :content, :user, :battle, presence: true
 end

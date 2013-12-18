@@ -26,6 +26,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    ancestry (2.0.0)
+      activerecord (>= 3.0.0)
     arel (4.0.0)
     atomic (1.1.14)
     builder (3.1.4)
@@ -166,6 +168,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  ancestry
   coffee-rails (~> 4.0.0)
   faye
   jbuilder (~> 1.2)

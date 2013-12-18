@@ -1,8 +1,6 @@
 class BattlesController < ApplicationController
 	def index
-		#time_range = (Time.now - 1.day)..Time.now
-		#@battles = Message.where("created_at" => time_range)
-		@battles = Battle.all.joins(:user)
+		@battles = Battle.all
 	end
 
 	def show
@@ -20,7 +18,7 @@ class BattlesController < ApplicationController
 		@battle.user = current_user
 		@battle.save
 
-		message = Message.new
+		message = Message.new(:parent_id => params[:parent_id])
 		message.content = params[:battle][:message]
 		message.user = current_user
 		message.battle = @battle

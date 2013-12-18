@@ -5,12 +5,9 @@
 <div class="row-fluid">
 
 	<div class="span10">
-		<div id="chatWrap" style="height: 500px; overflow-y: scroll; overflow-x: auto; border:2px solid;">
+		<div id="chatWrap">
 			<ul id="chat">
-				<%= form_for Message.new, remote: true do |f| %>
-					<input id="message_battle" name="message[battle]" value="<%= render text: params[:id] %>" type="hidden" />
-					<%= render @messages %>
-				<% end %>
+				<%= nested_messages @messages.arrange(:order => :created_at) %>
 			</ul>
 		</div>
 	</div>

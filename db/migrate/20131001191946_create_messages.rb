@@ -4,7 +4,6 @@ class CreateMessages < ActiveRecord::Migration
       t.belongs_to :user
       t.text :content
       t.belongs_to :battle
-      t.belongs_to :parent
       
       t.timestamps
     end
