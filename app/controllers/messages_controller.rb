@@ -9,12 +9,19 @@ class MessagesController < ApplicationController
   #end
 
   def create
-    @message = Message.create!(params[:message].permit(:content, :user, :room_number))
+    @message = Message.new
+    @message.content = params[:message][:content]
+    @message.user = current_user
+    @message.room_number = params[:message][:room_number]
     @channel = params[:message][:room_number]
-    broadcast("/channels/#{@channel}", @message)
-    render :json => @message
-    #PrivatePub.publish_to("/channels/#{@channel}", message: @message)
-    #redirect_to messages_path
+
+    if @message.save
+      broadcast("/channels/#{@channel}", @message)
+      render :json => @message
+    else
+      redirect_to root_path
+    end
+
   end
 
   private
