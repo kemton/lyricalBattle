@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131128125241) do
     t.integer  "user_id"
     t.text     "content"
     t.integer  "battle_id"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

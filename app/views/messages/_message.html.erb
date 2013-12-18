@@ -1,4 +1,4 @@
 <li>
 	<%= message.user.name %> - <%= message.created_at.to_time.strftime('%H:%M') %><br />
-	<%= message.content %> Continue: <input id="message_content" name="message[content]" /> <button value="<%= message.id %>">send</button>
+	<%= message.content %> <input placeholder="continue story..." id="message_content" name="message[content]" /> <button name="message[parent]" value="<%= message.id %>">send</button>
 </li>

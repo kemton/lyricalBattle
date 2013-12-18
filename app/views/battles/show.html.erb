@@ -1,5 +1,5 @@
 <% content_for :title, "Battle" %>
-
+<%= link_to "<- Back to lobby", battles_path %>
 <h1>Battle</h1>
 
 <div class="row-fluid">
@@ -21,21 +21,6 @@
 			<em><span id="online">-</span>/10</em>
 			<ul id="players"></ul>
 		</div>
-	</div>
-
-</div>
-
-<div class="row-fluid">
-
-	<div class="span12">
-		<hr />
-		<%= form_for Message.new, remote: true do |f| %>
-			<input id="message_battle" name="message[battle]" value="<%= render text: params[:id] %>" type="hidden" />
-			<%= f.text_field :content %>
-			<%= f.submit "Send" %>
-		<% end %>
-
-		<%= link_to "Back to lobby", battles_path %>
 	</div>
 
 </div>

@@ -4,27 +4,20 @@ class MessagesController < ApplicationController
     @messages = Message.all
   end
 
-  #def new
-  #  @message = Message.new
-  #end
-
   def create
     @message = Message.new
     @message.content = params[:message][:content]
     @message.user = current_user
-    battle = Battle.find(params[:message][:battle])
-    @message.battle = battle
-    #parent = Message.find(params[:message][:battle])
-    #@message.parent = parent
-    @channel = battle.id
+    @message.battle = Battle.find(params[:message][:battle])
+    @message.parent = Message.find(params[:message][:parent])
 
     if @message.save
       broadcast("/channels/#{@channel}", @message)
+      @channel = @message.battle.id
       render :json => @message
     else
       redirect_to root_path
     end
-
   end
 
   private
