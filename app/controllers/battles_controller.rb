@@ -16,16 +16,12 @@ class BattlesController < ApplicationController
 	end
 
 	def create
-		if current_user.present?
-			@battle = Battle.new
-			@battle.first_line = params[:battle][:first_line]
-			@battle.user = current_user
+		@battle = Battle.new
+		@battle.first_line = params[:battle][:first_line]
+		@battle.user = current_user
 
-			if @battle.save
-				redirect_to @battle
-			else
-				redirect_to root_path
-			end
+		if @battle.save
+			redirect_to @battle
 		else
 			redirect_to root_path
 		end
