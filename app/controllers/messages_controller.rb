@@ -14,6 +14,8 @@ class MessagesController < ApplicationController
     @message.user = current_user
     battle = Battle.find(params[:message][:battle])
     @message.battle = battle
+    #parent = Message.find(params[:message][:battle])
+    #@message.parent = parent
     @channel = battle.id
 
     if @message.save

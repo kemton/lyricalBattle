@@ -17,8 +17,16 @@ class BattlesController < ApplicationController
 
 	def create
 		@battle = Battle.new
-		@battle.first_line = params[:battle][:first_line]
 		@battle.user = current_user
+		@battle.save
+
+		message = Message.new
+		message.content = params[:battle][:message]
+		message.user = current_user
+		message.battle = @battle
+		message.save
+
+		@battle.message = message
 
 		if @battle.save
 			redirect_to @battle

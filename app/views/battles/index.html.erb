@@ -2,13 +2,13 @@
 	<div id="current_battles">
 		<div class="bubble">
 			<%= form_for :battle, :url => {:action => 'create'} do |f| %>
-    			<%= f.text_field :first_line, placeholder: 'Create new battle' %>
+    			<%= f.text_field :message, placeholder: 'Create new battle' %>
     			<%= f.submit %>
 			<% end %>
 		</div>
 		<% @battles.each do |battle| %>
 			<div class="bubble">
-				<%= link_to "#{battle.first_line}", battle_path("#{battle.id}") %><br />
+				<%= link_to "#{battle.message.content}", battle_path("#{battle.id}") %><br />
 				Creator: <%= "#{battle.user.name}" %>
 			</div>
 		<% end %>

@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20131128125241) do
 
   create_table "battles", force: true do |t|
+    t.integer  "message_id"
     t.integer  "user_id"
-    t.string   "first_line"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
