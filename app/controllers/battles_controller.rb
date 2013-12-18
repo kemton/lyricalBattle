@@ -8,7 +8,7 @@ class BattlesController < ApplicationController
 	def show
 		if Battle.exists?("id" => params[:id])
 			@battle = Battle.where("id" => params[:id]).first
-			@messages = Message.where("room_number" => params[:id])
+			@messages = Message.where("battle_id" => params[:id])
 			@user = User.where("id" => @battle.user_id).first
 		else
 			redirect_to root_path

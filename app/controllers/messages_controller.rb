@@ -12,8 +12,9 @@ class MessagesController < ApplicationController
     @message = Message.new
     @message.content = params[:message][:content]
     @message.user = current_user
-    @message.room_number = params[:message][:room_number]
-    @channel = params[:message][:room_number]
+    battle = Battle.find(params[:message][:battle])
+    @message.battle = battle
+    @channel = battle.id
 
     if @message.save
       broadcast("/channels/#{@channel}", @message)

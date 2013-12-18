@@ -10,7 +10,7 @@
 				<%= "#{@battle.first_line}" %>
 				<hr />
 				<%= form_for Message.new, remote: true do |f| %>
-					<input id="message_room_number" name="message[room_number]" value="<%= render text: params[:id] %>" type="hidden" />
+					<input id="message_battle" name="message[battle]" value="<%= render text: params[:id] %>" type="hidden" />
 					<%= render @messages %>
 				<% end %>
 			</ul>
@@ -32,8 +32,7 @@
 	<div class="span12">
 		<hr />
 		<%= form_for Message.new, remote: true do |f| %>
-			<input id="message_user" name="message[user]" value="testi_sender" type="hidden" />
-			<input id="message_room_number" name="message[room_number]" value="<%= render text: params[:id] %>" type="hidden" />
+			<input id="message_battle" name="message[battle]" value="<%= render text: params[:id] %>" type="hidden" />
 			<%= f.text_field :content %>
 			<%= f.submit "Send" %>
 		<% end %>
