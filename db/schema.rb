@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20131128125241) do
   end
 
   create_table "messages", force: true do |t|
-    t.string   "user"
+    t.integer  "user_id"
     t.text     "content"
     t.integer  "room_number"
     t.datetime "created_at"

@@ -1,7 +1,7 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-      t.string :user
+      t.belongs_to :user
       t.text :content
       t.integer :room_number
 
