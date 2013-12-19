@@ -1,5 +1,4 @@
-LyricalBattle
-=============
+= LyricalBattle
 
 == Developer
 Set facebook config file config/config/initializers/facebook_token.rb.
