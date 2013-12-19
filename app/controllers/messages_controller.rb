@@ -4,6 +4,10 @@ class MessagesController < ApplicationController
     @messages = Message.all
   end
 
+  def show
+    @message = Message.find(params[:id])
+  end
+
   def create
     @message = Message.new(:parent_id => params[:message][:parent_id])
     @message.content = params[:message][:content]

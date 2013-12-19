@@ -4,7 +4,7 @@
 	<div class="message">
 		<div class="user_name"><%= message.user.name %></div><div class="created_at"><%= message.created_at.strftime("%B %d, %Y") %></div> 
 		<div class="content">
-			<%= message.content %>
+			<%= link_to "#{message.content}", message_path(message) %>
 		</div>
 		<div class="actions">
     		<%= f.text_field :content %> <%= f.submit "Send" %>

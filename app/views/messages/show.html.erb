@@ -1,0 +1,11 @@
+<h1>Result</h1>
+
+<% msg = @message %>
+<% story = "#{msg.content}" %>
+
+<% while msg.parent.present? do %>
+	<% story = "#{msg.parent.content} | #{story}" %>
+	<% msg = msg.parent %>
+<% end %>
+
+<strong><%= story %></strong>
