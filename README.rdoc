@@ -1,6 +1,6 @@
 = LyricalBattle
 
 == Developer
-Set facebook config file config/config/initializers/facebook_token.rb.
+Set facebook config file config/initializers/facebook_token.rb.
     FACEBOOK_APP_ID = "app_id"
     FACEBOOK_SECRET = "secret"
