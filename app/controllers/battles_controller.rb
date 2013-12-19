@@ -18,7 +18,7 @@ class BattlesController < ApplicationController
 		@battle.user = current_user
 		@battle.save
 
-		message = Message.new(:parent_id => params[:parent_id])
+		message = Message.new
 		message.content = params[:battle][:message]
 		message.user = current_user
 		message.battle = @battle
